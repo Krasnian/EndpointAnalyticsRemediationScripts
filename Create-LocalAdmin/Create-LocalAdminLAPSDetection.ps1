@@ -5,6 +5,7 @@ Author:
 - Andrew Taylor (andrewstaylor.com)
 - Florian Slazmann (scloud.work)
 - Jannik Reinhard (jannikreinhard.com)
+- Simon Skotheimsvik (skotheimsvik.no)
 Script: Create-LocalAdmin
 Description:
 Hint: This is a community script. There is no guarantee for this. Please check thoroughly before running.
@@ -15,4 +16,10 @@ Context: 64 Bit
 
 $localAdminName = ""
 
-Remove-LocalUser -Name $localAdminName
+if(Get-LocalUser | where-Object Name -eq $localAdminName){
+    Write-Host "User does already exist"
+    Exit 0
+}else{
+    Write-Host "User does not exist"
+    Exit 1
+}
